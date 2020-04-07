@@ -7,13 +7,6 @@ authors:
 
 description: all-in-one shard that allows for IP-based geolocation
 
-dependencies:
-  kemal:
-    github: kemalcr/kemal
-  sentry:
-    github: samueleaton/sentry
-    branch: master
-
 crystal: 0.33.0
 
 license: MIT
