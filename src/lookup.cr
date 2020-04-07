@@ -1,6 +1,7 @@
 require "csv"
 require "zip"
 require "baked_file_system"
+require "marshal"
 
 module IPGeolocation
   class Storage
@@ -26,14 +27,15 @@ module IPGeolocation
       end
     end
 
-    def build_index(file_path = nil)
-      if file_path
-        Zip::File.open(file_path.not_nil!) do |zip_file|
-          zip_file.entries.first.open { |io| process_index_file(io) }
-        end
-      else
-        process_index_file(Storage.get("IP2LOCATION-LITE-DB3.CSV"))
+    def build_index(file_path)
+      Zip::File.open(file_path.not_nil!) do |zip_file|
+        zip_file.entries.first.open { |io| process_index_file(io) }
       end
+    end
+
+    def export_index(file_path = "./output.dat")
+      bytes = {@mapping, @keys, @locations}.marshal_pack
+      File.write(file_path, bytes)
     end
 
     private def process_index_file(io)

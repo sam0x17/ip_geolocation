@@ -4,3 +4,7 @@ shards:
     github: schovi/baked_file_system
     version: 0.9.8
 
+  marshal:
+    github: sam0x17/marshal
+    commit: 347d073ce7af76a5e1e5da6e328cab29f57f44c7
+

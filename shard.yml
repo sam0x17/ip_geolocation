@@ -11,6 +11,9 @@ dependencies:
   baked_file_system:
     github: schovi/baked_file_system
     version: 0.9.8
+  marshal:
+    github: sam0x17/marshal
+    branch: master
 
 crystal: 0.33.0
 
