@@ -1,10 +1,14 @@
 require "csv"
 require "zip"
+require "baked_file_system"
 
 module IPGeolocation
-  class Lookup
+  class Storage
+    extend BakedFileSystem
+    bake_folder "../data"
+  end
 
-    DEFAULT_INPUT_PATH = "data/IP2LOCATION-LITE-DB3.zip"
+  class Lookup
     @mapping = Hash(Range(UInt32, UInt32), UInt64).new
     @keys = Array(Range(UInt32, UInt32)).new
     @locations = Hash(UInt64, Location).new
@@ -22,9 +26,13 @@ module IPGeolocation
       end
     end
 
-    def build_index(file_path = DEFAULT_INPUT_PATH)
-      Zip::File.open(file_path) do |zip_file|
-        zip_file.entries.first.open { |io| process_index_file(io) }
+    def build_index(file_path = nil)
+      if file_path
+        Zip::File.open(file_path.not_nil!) do |zip_file|
+          zip_file.entries.first.open { |io| process_index_file(io) }
+        end
+      else
+        process_index_file(Storage.get("IP2LOCATION-LITE-DB3.CSV"))
       end
     end
 

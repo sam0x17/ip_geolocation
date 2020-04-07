@@ -7,6 +7,12 @@ describe Lookup do
       lookup.build_index("data/excerpt.zip")
       lookup.size.should eq(100)
     end
+
+    it "builds an index using built in database" do
+      lookup = Lookup.new
+      lookup.build_index
+      lookup.size.should eq 2912820
+    end
   end
 
   describe "#find" do
