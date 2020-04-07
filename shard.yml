@@ -1,11 +1,11 @@
 name: ip_geolocation_api
 version: 0.1.0
 
-# authors:
-#   - name <email@example.com>
+authors:
+  - Sam Johnson <sam@durosoft.com>
+  - Florian Rösler <florian.roesler@googlemail.com>
 
-# description: |
-#   Short description of logo_api
+description: all-in-one shard that allows for IP-based geolocation
 
 dependencies:
   kemal:
@@ -14,8 +14,6 @@ dependencies:
     github: samueleaton/sentry
     branch: master
 
-# development_dependencies:
-#   webmock:
-#     github: manastech/webmock.cr
+crystal: 0.33.0
 
-# license: MIT
+license: MIT
